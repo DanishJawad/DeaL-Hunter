@@ -1,0 +1,1 @@
+"""Deal Hunter application package."""
