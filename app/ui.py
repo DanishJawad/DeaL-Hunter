@@ -15,7 +15,7 @@ from .games_db import load_games_database
 from .logging_config import configure_logging
 from .ollama_helper import init_ollama
 from .preferences import extract_preferences_from_query, get_preferences, merge_preferences, save_preferences
-from .vectorstore import PineconeStore
+from .vectorstore import get_vector_store
 
 LOGGER = logging.getLogger(__name__)
 
@@ -47,9 +47,9 @@ def get_cheapshark_client() -> CheapSharkClient:
 
 
 @st.cache_resource
-def get_pinecone_store() -> PineconeStore:
+def get_vector_store_resource():
     config = load_config()
-    return PineconeStore(config)
+    return get_vector_store(config)
 
 
 @st.cache_resource
@@ -72,7 +72,7 @@ def get_store_map():
 
 @st.cache_data(ttl=1800)
 def cached_similar_games(query: str, top_k: int) -> list[dict]:
-    store = get_pinecone_store()
+    store = get_vector_store_resource()
     return [game.model_dump() for game in store.search_similar_games(query=query, top_k=top_k)]
 
 
@@ -101,7 +101,10 @@ def run_app() -> None:
             color: var(--ink);
         }
         .block-container {
-            padding-top: 2.2rem;
+            padding-top: 3rem;
+            padding-bottom: 2.6rem;
+            padding-left: 2.2rem;
+            padding-right: 2.2rem;
         }
         h1, h2, h3, h4, h5, h6, p, label, span, div {
             font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
@@ -110,7 +113,7 @@ def run_app() -> None:
             background: var(--surface-strong);
             border: 1px solid rgba(25, 245, 255, 0.2);
             border-radius: 28px;
-            padding: 24px 28px;
+            padding: 28px 32px;
             box-shadow: 0 30px 80px rgba(3, 8, 20, 0.7), 0 0 40px rgba(25, 245, 255, 0.08);
             backdrop-filter: blur(18px);
             position: relative;
@@ -126,7 +129,7 @@ def run_app() -> None:
         .hero-inner {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 24px;
         }
         .hero-logo {
             width: 78px;
@@ -139,17 +142,19 @@ def run_app() -> None:
             font-weight: 700;
             margin: 0 0 6px 0;
             letter-spacing: 0.02em;
+            line-height: 1.05;
         }
         .hero-subtitle {
             color: var(--muted);
             font-size: 1.05rem;
             margin: 0;
+            line-height: 1.5;
         }
         .hero-strip {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 12px;
-            margin-top: 16px;
+            margin-top: 20px;
             position: relative;
             z-index: 1;
         }
@@ -157,7 +162,7 @@ def run_app() -> None:
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(25, 245, 255, 0.14);
             border-radius: 16px;
-            padding: 12px 14px;
+            padding: 14px 16px;
         }
         .hero-chip-title {
             display: block;
@@ -170,15 +175,7 @@ def run_app() -> None:
         .hero-chip-text {
             color: var(--text);
             font-size: 0.96rem;
-            line-height: 1.35;
-        }
-        .search-shell {
-            margin-top: 18px;
-            background: rgba(16, 20, 32, 0.72);
-            border: 1px solid rgba(25, 245, 255, 0.12);
-            border-radius: 24px;
-            padding: 18px 18px 10px;
-            box-shadow: 0 20px 50px rgba(3, 7, 18, 0.38);
+            line-height: 1.4;
         }
         .form-shell {
             margin-top: 18px;
@@ -193,7 +190,20 @@ def run_app() -> None:
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            margin: 18px 0 10px;
+            margin: 22px 0 12px;
+        }
+        .section-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .game-thumb {
+            width: 84px;
+            height: 84px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 1px solid rgba(25, 245, 255, 0.18);
+            box-shadow: 0 14px 30px rgba(3, 7, 18, 0.55);
         }
         .section-kicker {
             color: var(--muted);
@@ -208,33 +218,34 @@ def run_app() -> None:
         .results-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-            margin-top: 12px;
+            gap: 16px;
+            margin-top: 14px;
         }
         .deal-card {
             background: rgba(16, 20, 32, 0.78);
             border: 1px solid rgba(25, 245, 255, 0.12);
             border-radius: 20px;
-            padding: 16px;
+            padding: 18px;
         }
         .deal-card-top {
             display: flex;
             justify-content: space-between;
             gap: 12px;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .deal-game {
             font-size: 1.02rem;
             font-weight: 700;
             margin: 0 0 4px;
+            line-height: 1.3;
         }
         .deal-store {
             color: var(--muted);
             font-size: 0.92rem;
         }
         .deal-price {
-            font-size: 1.45rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--green);
             white-space: nowrap;
@@ -243,13 +254,13 @@ def run_app() -> None:
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: 10px;
+            margin-top: 12px;
         }
         .deal-meta span {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 10px;
+            padding: 7px 12px;
             border-radius: 999px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -257,16 +268,24 @@ def run_app() -> None:
         }
         .deal-link {
             display: inline-block;
-            margin-top: 12px;
+            margin-top: 14px;
             color: var(--cyan, var(--neon-cyan));
             font-size: 0.93rem;
+        }
+        .deal-card .small {
+            line-height: 1.45;
+        }
+        .stTextInput label {
+            margin-bottom: 8px;
         }
         .stTextInput input {
             border-radius: 16px;
             border: 1px solid rgba(25, 245, 255, 0.22);
             background: rgba(9, 12, 20, 0.8);
             color: var(--ink);
-            padding: 12px 14px;
+            padding: 14px 16px;
+            font-size: 1rem;
+            line-height: 1.2;
             box-shadow: 0 12px 30px rgba(3, 7, 18, 0.65);
         }
         .stTextInput input::placeholder {
@@ -281,16 +300,21 @@ def run_app() -> None:
             background: linear-gradient(135deg, #19f5ff 0%, #3a74ff 50%, #ff2d95 100%);
             color: #03131e;
             font-weight: 600;
-            padding: 10px 18px;
+            padding: 12px 20px;
             box-shadow: 0 14px 30px rgba(25, 245, 255, 0.2), 0 0 22px rgba(255, 45, 149, 0.15);
         }
         .stButton > button:hover {
             filter: brightness(1.02);
         }
         div[data-testid="stForm"] {
-            background: transparent;
-            border: 0;
-            padding: 0;
+            margin-top: 20px;
+            background: rgba(16, 20, 32, 0.72);
+            border: 1px solid rgba(25, 245, 255, 0.12);
+            border-radius: 24px;
+            padding: 22px 22px 16px;
+            box-shadow: 0 20px 50px rgba(3, 7, 18, 0.38);
+            position: relative;
+            z-index: 1;
         }
         div[data-testid="stFormSubmitButton"] button {
             width: auto;
@@ -300,6 +324,12 @@ def run_app() -> None:
             border-radius: 18px;
             border: 1px solid rgba(25, 245, 255, 0.15);
             box-shadow: 0 16px 40px rgba(3, 7, 18, 0.55);
+        }
+        div[data-testid="metric-container"] {
+            padding: 14px 16px;
+        }
+        div[data-testid="stAlert"] > div {
+            padding: 12px 16px;
         }
         .stMarkdown table {
             background: transparent;
@@ -322,6 +352,23 @@ def run_app() -> None:
         }
         .hero-shell {
             animation: pulseGlow 6s ease-in-out infinite;
+        }
+        @media (max-width: 900px) {
+            .block-container {
+                padding-top: 2rem;
+                padding-left: 1.2rem;
+                padding-right: 1.2rem;
+            }
+            .hero-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .hero-strip {
+                grid-template-columns: 1fr;
+            }
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
         }
         </style>
         """,
@@ -375,7 +422,9 @@ def run_app() -> None:
             submitted = st.form_submit_button("Find Deals")
 
     if not submitted:
-        st.caption("Using local Ollama model + Pinecone")
+        backend = (config.vectorstore_backend or "pinecone").lower()
+        backend_label = "Chroma" if backend == "chroma" else "Pinecone"
+        st.caption(f"Using local Ollama model + {backend_label}")
         return
 
     if not query.strip():
@@ -391,7 +440,7 @@ def run_app() -> None:
             )
             cheapshark = get_cheapshark_client()
             try:
-                store = get_pinecone_store()
+                store = get_vector_store_resource()
             except AppError as exc:
                 store = None
                 st.warning(friendly_error_message(exc))
@@ -413,9 +462,6 @@ def run_app() -> None:
             prefs = merge_preferences(prefs, extracted)
             save_preferences(prefs)
 
-            progress = st.progress(0, text="Analyzing query...")
-            progress.progress(25, text="Searching similar games...")
-
             results = get_recommendations(
                 query=query.strip(),
                 max_price=float(prefs.budget),
@@ -428,13 +474,10 @@ def run_app() -> None:
                 limit=5,
                 search_fn=cached_similar_games if store is not None else None,
             )
-            progress.progress(70, text="Ranking deals...")
-
             llm = get_llm()
             tools = build_tools(cheapshark, store, lookup, store_map)
             executor = build_agent_executor(llm, tools)
             agent_summary = run_deal_agent_sync(query, executor)
-            progress.progress(100, text="Done")
 
     except AppError as exc:
         LOGGER.exception("Search failed")
@@ -450,21 +493,27 @@ def run_app() -> None:
 
     if not results.recommendations:
         st.info("No deals found. Try a different game or higher max price.")
-        st.caption("Using local Ollama model + Pinecone")
+        backend = (config.vectorstore_backend or "pinecone").lower()
+        backend_label = "Chroma" if backend == "chroma" else "Pinecone"
+        st.caption(f"Using local Ollama model + {backend_label}")
         return
-
-    fetched_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    st.caption(f"Prices fetched at {fetched_at}")
 
     if results.is_exact_game:
         best_rec = min(results.recommendations, key=lambda rec: rec.deal.sale_price)
         best_url = f"https://www.cheapshark.com/redirect?dealID={best_rec.deal.deal_id}"
+        thumb_url = best_rec.deal.thumb or ""
+        thumb_html = ""
+        if thumb_url:
+            thumb_html = f'<img class="game-thumb" src="{thumb_url}" alt="{best_rec.game.title} cover" />'
         st.markdown(
             f"""
             <div class="section-header">
-                <div>
-                    <div class="section-kicker">Exact game pricing</div>
-                    <h2 class="section-title">{best_rec.game.title}</h2>
+                <div class="section-title-wrap">
+                    {thumb_html}
+                    <div>
+                        <div class="section-kicker">Exact game pricing</div>
+                        <h2 class="section-title">{best_rec.game.title}</h2>
+                    </div>
                 </div>
                 <a class="deal-link" href="{best_url}" target="_blank">Open best deal</a>
             </div>

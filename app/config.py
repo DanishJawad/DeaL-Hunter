@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 @dataclass(frozen=True)
 class AppConfig:
     pinecone_api_key: str
+    vectorstore_backend: str
     pinecone_index_name: str
     pinecone_cloud: str
     pinecone_region: str
@@ -29,17 +30,21 @@ class AppConfig:
     games_cache_ttl_hours: int
     stores_cache_ttl_hours: int
     request_timeout_seconds: int
+    chroma_persist_dir: str | None
+    chroma_server_url: str | None
 
     def validate(self) -> list[str]:
         missing = []
-        if not self.pinecone_api_key:
-            missing.append("PINECONE_API_KEY")
-        if not self.pinecone_index_name:
-            missing.append("PINECONE_INDEX_NAME")
-        if not self.pinecone_cloud:
-            missing.append("PINECONE_CLOUD")
-        if not self.pinecone_region:
-            missing.append("PINECONE_REGION")
+        backend = (self.vectorstore_backend or "").lower()
+        if backend != "chroma":
+            if not self.pinecone_api_key:
+                missing.append("PINECONE_API_KEY")
+            if not self.pinecone_index_name:
+                missing.append("PINECONE_INDEX_NAME")
+            if not self.pinecone_cloud:
+                missing.append("PINECONE_CLOUD")
+            if not self.pinecone_region:
+                missing.append("PINECONE_REGION")
         return missing
 
 
@@ -53,6 +58,7 @@ def load_config() -> AppConfig:
 
     return AppConfig(
         pinecone_api_key=os.getenv("PINECONE_API_KEY", ""),
+        vectorstore_backend=os.getenv("VECTORSTORE_BACKEND", "chroma"),
         pinecone_index_name=os.getenv("PINECONE_INDEX_NAME", "games"),
         pinecone_cloud=os.getenv("PINECONE_CLOUD", "aws"),
         pinecone_region=os.getenv("PINECONE_REGION", "us-east-1"),
@@ -77,4 +83,6 @@ def load_config() -> AppConfig:
         games_cache_ttl_hours=int(os.getenv("GAMES_CACHE_TTL_HOURS", "24")),
         stores_cache_ttl_hours=int(os.getenv("STORES_CACHE_TTL_HOURS", "24")),
         request_timeout_seconds=int(os.getenv("REQUEST_TIMEOUT_SECONDS", "30")),
+        chroma_persist_dir=os.getenv("CHROMA_PERSIST_DIR"),
+        chroma_server_url=os.getenv("CHROMA_SERVER_URL"),
     )

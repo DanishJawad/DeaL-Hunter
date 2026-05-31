@@ -298,11 +298,514 @@ GAME_ENTRIES = [
 ]
 
 
+SUPPLEMENTAL_SERIES = [
+    {
+        "titles": [
+            "Assassin's Creed II",
+            "Assassin's Creed Brotherhood",
+            "Assassin's Creed Revelations",
+            "Assassin's Creed IV Black Flag",
+            "Assassin's Creed Rogue",
+            "Assassin's Creed Unity",
+            "Assassin's Creed Syndicate",
+            "Assassin's Creed Mirage",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["open world", "stealth", "historical"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Far Cry 3",
+            "Far Cry 4",
+            "Far Cry Primal",
+            "Far Cry New Dawn",
+            "Far Cry Blood Dragon",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["open world", "shooting", "chaos"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Call of Duty 4 Modern Warfare",
+            "Call of Duty Modern Warfare 2",
+            "Call of Duty Modern Warfare",
+            "Call of Duty Black Ops",
+            "Call of Duty Black Ops II",
+            "Call of Duty Black Ops III",
+            "Call of Duty WWII",
+            "Call of Duty Vanguard",
+        ],
+        "genres": ["Shooter"],
+        "tags": ["military", "multiplayer", "cinematic"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Battlefield 3",
+            "Battlefield 4",
+            "Battlefield Hardline",
+            "Battlefield V",
+        ],
+        "genres": ["Shooter"],
+        "tags": ["large-scale", "multiplayer", "warfare"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Need for Speed Most Wanted",
+            "Need for Speed Most Wanted 2012",
+            "Need for Speed Rivals",
+            "Need for Speed Payback",
+            "Need for Speed Unbound",
+        ],
+        "genres": ["Racing"],
+        "tags": ["street racing", "cars", "arcade"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Tomb Raider Legend",
+            "Tomb Raider Anniversary",
+            "Tomb Raider Underworld",
+            "Lara Croft and the Guardian of Light",
+            "Lara Croft and the Temple of Osiris",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["platforming", "puzzles", "exploration"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Mass Effect",
+            "Mass Effect 2",
+            "Mass Effect 3",
+            "Mass Effect Andromeda",
+        ],
+        "genres": ["RPG", "Action"],
+        "tags": ["choices", "sci-fi", "story-driven"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Dragon Age Origins",
+            "Dragon Age II",
+            "Dragon Age Inquisition",
+        ],
+        "genres": ["RPG"],
+        "tags": ["choices", "party", "fantasy"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Resident Evil 0",
+            "Resident Evil HD Remaster",
+            "Resident Evil 3",
+            "Resident Evil 5",
+            "Resident Evil 6",
+            "Resident Evil Revelations",
+            "Resident Evil Revelations 2",
+        ],
+        "genres": ["Horror", "Action"],
+        "tags": ["survival", "zombies", "atmospheric"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Final Fantasy VII Remake Intergrade",
+            "Final Fantasy VIII Remastered",
+            "Final Fantasy IX",
+            "Final Fantasy X X-2 HD Remaster",
+            "Final Fantasy XII The Zodiac Age",
+            "Final Fantasy XV Royal Edition",
+            "Crisis Core Final Fantasy VII Reunion",
+        ],
+        "genres": ["RPG"],
+        "tags": ["story-driven", "fantasy", "turn-based"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Persona 3 Portable",
+            "Persona 5 Strikers",
+            "Persona 5 Tactica",
+        ],
+        "genres": ["RPG"],
+        "tags": ["story-driven", "social links", "turn-based"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Yakuza Kiwami",
+            "Yakuza Kiwami 2",
+            "Yakuza 3 Remastered",
+            "Yakuza 4 Remastered",
+            "Yakuza 5 Remastered",
+            "Yakuza 6 The Song of Life",
+            "Judgment",
+            "Lost Judgment",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["crime", "story-driven", "brawling"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Borderlands The Pre-Sequel",
+            "Tiny Tina's Wonderlands",
+        ],
+        "genres": ["Shooter", "RPG"],
+        "tags": ["loot", "co-op", "chaos"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Civilization IV",
+            "Civilization Revolution",
+            "Beyond Earth",
+        ],
+        "genres": ["Strategy"],
+        "tags": ["4x", "turn-based", "empire building"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Age of Empires III Definitive Edition",
+            "Age of Mythology",
+            "Age of Mythology Retold",
+        ],
+        "genres": ["Strategy"],
+        "tags": ["real-time strategy", "base building", "historical"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "XCOM Enemy Unknown",
+            "XCOM Enemy Within",
+            "XCOM Chimera Squad",
+        ],
+        "genres": ["Strategy"],
+        "tags": ["tactics", "squad", "aliens"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Mortal Kombat 9",
+            "Mortal Kombat X",
+            "Mortal Kombat 11",
+            "Mortal Kombat 1",
+        ],
+        "genres": ["Action"],
+        "tags": ["fighting", "competitive", "combo"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Street Fighter IV",
+            "Street Fighter V",
+            "Street Fighter 6",
+            "Ultra Street Fighter IV",
+        ],
+        "genres": ["Action"],
+        "tags": ["fighting", "competitive", "combo"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Tekken 6",
+            "Tekken 7",
+            "Tekken 8",
+            "Tekken Tag Tournament 2",
+        ],
+        "genres": ["Action"],
+        "tags": ["fighting", "competitive", "3d"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Sonic Generations",
+            "Sonic Mania",
+            "Sonic Forces",
+            "Sonic Frontiers",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["platforming", "speed", "colorful"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Batman Arkham Asylum",
+            "Batman Arkham City",
+            "Batman Arkham Origins",
+            "Batman Arkham Knight",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["combat", "stealth", "story-driven"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Dishonored",
+            "Dishonored 2",
+            "Dishonored Death of the Outsider",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["stealth", "choices", "story-driven"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Deus Ex",
+            "Deus Ex Human Revolution",
+            "Deus Ex Mankind Divided",
+        ],
+        "genres": ["RPG", "Action"],
+        "tags": ["choices", "stealth", "cyberpunk"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Saints Row",
+            "Saints Row 2",
+            "Saints Row The Third",
+            "Saints Row IV",
+            "Saints Row 2022",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["open world", "crime", "chaos"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Dying Light",
+            "Dying Light 2 Stay Human",
+        ],
+        "genres": ["Action", "Horror"],
+        "tags": ["survival", "parkour", "co-op"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Dead Island",
+            "Dead Island Riptide",
+            "Dead Island 2",
+        ],
+        "genres": ["Action", "Horror"],
+        "tags": ["survival", "co-op", "zombies"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Star Wars Knights of the Old Republic",
+            "Star Wars Knights of the Old Republic II",
+            "Star Wars Jedi Knight II Jedi Outcast",
+            "Star Wars Jedi Knight Jedi Academy",
+            "Star Wars Battlefront II",
+            "Star Wars Squadrons",
+            "Star Wars The Force Unleashed",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["sci-fi", "story-driven", "combat"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Halo The Master Chief Collection",
+            "Halo Reach",
+            "Halo Combat Evolved",
+            "Halo 2",
+            "Halo 3",
+            "Halo 4",
+        ],
+        "genres": ["Shooter"],
+        "tags": ["sci-fi", "story-driven", "multiplayer"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "BioShock",
+            "BioShock 2",
+        ],
+        "genres": ["Shooter", "Adventure"],
+        "tags": ["story-driven", "atmospheric", "single-player"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Middle-earth Shadow of Mordor",
+            "Middle-earth Shadow of War",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["open world", "combat", "fantasy"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Splinter Cell",
+            "Splinter Cell Chaos Theory",
+            "Splinter Cell Blacklist",
+        ],
+        "genres": ["Action"],
+        "tags": ["stealth", "tactical", "single-player"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Sniper Elite 3",
+            "Sniper Elite 4",
+            "Sniper Elite 5",
+        ],
+        "genres": ["Shooter"],
+        "tags": ["stealth", "tactical", "sniping"],
+        "tier": "mid",
+    },
+    {
+        "titles": [
+            "Wolfenstein The New Order",
+            "Wolfenstein The Old Blood",
+            "Wolfenstein Youngblood",
+        ],
+        "genres": ["Shooter"],
+        "tags": ["story-driven", "action", "alternate history"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Hitman",
+            "Hitman 2",
+        ],
+        "genres": ["Action"],
+        "tags": ["stealth", "tactical", "sandbox"],
+        "tier": "aaa",
+    },
+    {
+        "titles": [
+            "Just Cause 3",
+            "Sleeping Dogs Definitive Edition",
+            "Mad Max",
+            "The Division",
+            "Forza Horizon 4",
+        ],
+        "genres": ["Action", "Adventure"],
+        "tags": ["open world", "combat", "story-driven"],
+        "tier": "mid",
+    },
+]
+
+
+YEARLY_FRANCHISES = [
+    {
+        "template": "F1 {year}",
+        "years": list(range(2018, 2026)),
+        "genres": ["Racing"],
+        "tags": ["formula 1", "racing", "simulation"],
+        "tier": "aaa",
+    },
+    {
+        "template": "NBA 2K{year}",
+        "years": list(range(2018, 2026)),
+        "genres": ["Sports"],
+        "tags": ["basketball", "career mode", "competitive"],
+        "tier": "aaa",
+    },
+    {
+        "template": "Madden NFL {year}",
+        "years": list(range(2018, 2026)),
+        "genres": ["Sports"],
+        "tags": ["football", "career mode", "competitive"],
+        "tier": "aaa",
+    },
+    {
+        "template": "FIFA {year}",
+        "years": [2018, 2019, 2020, 2021, 2022, 2023],
+        "genres": ["Sports"],
+        "tags": ["football", "career mode", "competitive"],
+        "tier": "aaa",
+    },
+    {
+        "template": "EA Sports FC {year}",
+        "years": [24, 25],
+        "genres": ["Sports"],
+        "tags": ["football", "career mode", "competitive"],
+        "tier": "aaa",
+    },
+    {
+        "template": "Football Manager {year}",
+        "years": list(range(2018, 2026)),
+        "genres": ["Simulation", "Sports"],
+        "tags": ["management", "football", "strategy"],
+        "tier": "mid",
+    },
+    {
+        "template": "WWE 2K{year}",
+        "years": list(range(2018, 2026)),
+        "genres": ["Sports"],
+        "tags": ["wrestling", "career mode", "competitive"],
+        "tier": "mid",
+    },
+    {
+        "template": "MotoGP {year}",
+        "years": list(range(2018, 2026)),
+        "genres": ["Racing"],
+        "tags": ["motorcycles", "racing", "simulation"],
+        "tier": "mid",
+    },
+]
+
+
+def _build_series_entries(series_definitions: list[dict]) -> list[dict]:
+    entries: list[dict] = []
+    for series in series_definitions:
+        titles = series.get("titles") or []
+        genres = series.get("genres") or ["Action"]
+        tags = series.get("tags") or DEFAULT_TAGS_BY_GENRE.get(genres[0], [])
+        tier = series.get("tier", "aaa")
+        for title in titles:
+            entries.append({"title": title, "genres": genres, "tags": tags, "tier": tier})
+    return entries
+
+
+def _build_yearly_entries(series_definitions: list[dict]) -> list[dict]:
+    entries: list[dict] = []
+    for series in series_definitions:
+        template = series.get("template")
+        years = series.get("years") or []
+        genres = series.get("genres") or ["Action"]
+        tags = series.get("tags") or DEFAULT_TAGS_BY_GENRE.get(genres[0], [])
+        tier = series.get("tier", "mid")
+        if not template:
+            continue
+        for year in years:
+            title = template.format(year=year)
+            entries.append({"title": title, "genres": genres, "tags": tags, "tier": tier})
+    return entries
+
+
+def _dedupe_entries(entries: list[dict]) -> list[dict]:
+    seen: set[str] = set()
+    deduped: list[dict] = []
+    for entry in entries:
+        title = str(entry.get("title", "")).strip().lower()
+        if not title or title in seen:
+            continue
+        seen.add(title)
+        deduped.append(entry)
+    return deduped
+
+
+ALL_GAME_ENTRIES = _dedupe_entries(
+    GAME_ENTRIES
+    + _build_series_entries(SUPPLEMENTAL_SERIES)
+    + _build_yearly_entries(YEARLY_FRANCHISES)
+)
+
+
 def build_games_database(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
-    if len(GAME_ENTRIES) < 150:
-        raise ValueError("Game dataset must contain at least 150 entries")
+    if len(ALL_GAME_ENTRIES) < 300:
+        raise ValueError("Game dataset must contain at least 300 entries")
 
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(
@@ -320,7 +823,7 @@ def build_games_database(path: Path) -> None:
         )
         writer.writeheader()
 
-        for entry in GAME_ENTRIES:
+        for entry in ALL_GAME_ENTRIES:
             title = entry["title"]
             genres = entry.get("genres") or ["Action"]
             tags = entry.get("tags") or DEFAULT_TAGS_BY_GENRE.get(genres[0], [])

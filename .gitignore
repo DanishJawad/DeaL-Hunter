@@ -12,3 +12,5 @@ __pycache__/
 .cache/
 /data/cache/
 /data/games.json
+/data/chroma_persist*/
+/notes/

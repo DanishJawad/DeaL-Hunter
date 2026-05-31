@@ -92,3 +92,17 @@ def parse_intent(
         notes=notes,
         used_parser=used_parser,
     )
+
+
+def extract_price_limit(query: str) -> float | None:
+    text = query.strip().lower()
+    matched_prices: list[float] = []
+    for pattern in _PRICE_PATTERNS:
+        for match in pattern.findall(text):
+            try:
+                matched_prices.append(float(match))
+            except ValueError:
+                continue
+    if not matched_prices:
+        return None
+    return max(1.0, min(matched_prices))
