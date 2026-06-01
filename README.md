@@ -121,13 +121,13 @@ streamlit run main.py
 
 ## Screenshots
 
-#Home
+# Home
 ![Home](docs/screenshots/home.png)
 
-#Exact Game Pricing  
+# Exact Game Pricing  
 ![Exact game pricing](docs/screenshots/exact_game_pricing.png)
 
-#Similar Games Recommendation
+# Similar Games Recommendation
 ![Similar games recommendations](docs/screenshots/similar_games_reccommendation.png)
 
 ## Architecture
